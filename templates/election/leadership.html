@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Leading Candidates :-DEEPSENSE DIGITAL SOLUTIONS</title>
+   <!-- <meta http-equiv="refresh" content="30">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <style>
+        body{
+    background-color: #01afab;
+}
+
+
+
+.img{
+    background-color: white;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+max-width: 200px;
+}
+.name{
+background-color: white;
+flex-wrap: wrap;
+}
+.count{
+    background-color: white;
+}
+.img-fluid{
+    border-radius: 100%;
+
+
+
+}
+ .logo {
+            min-width: 150px;
+        }
+
+
+
+@media screen and (max-width: 600px) {
+h3{
+    font-size: 15px;
+}
+.post{
+    margin-top: -80px;
+}
+}
+.btn {
+            background-color: #01afab;
+            color: #e1ecec;
+        }
+        .btn:hover {
+            background-color: rgba(1, 175, 171, 0.5);
+        }
+
+.container{
+    max-width: 800px;
+}
+
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-light bg-light fixed-top">
+    <a class="navbar-brand" href="https://deepsense.in/">
+        <img src="{% static 'deepsense_logo.png' %}" class="img-fluid logo" width="30" height="30"
+             class="d-inline-block align-top" alt=""></a>
+    {% if not request.user.email %}
+        <a href="{% url 'user-login' %}">
+            <button class="btn">Login</button>
+        </a>
+    {% endif %}
+    {% if request.user.is_eligible %}
+        <a href="{% url 'candidates' %}">
+            <button class="btn">Vote</button>
+        </a>
+    {% endif %}
+</nav>
+<div class="container p-2 mt-5 pt-5">
+<div class="row">
+    {% for leadershipbyvote in leadershipbyvotes %}
+    <div class="col-12 py-1">
+        <div class="row main m-0">
+            <div class="col-4 img p-1">
+                <img src="{{ leadershipbyvote.get_small_img_url }}" class="img-fluid">
+            </div>
+            <div class="col-6 name d-flex  justify-content-center align-items-center">
+                <h3>{{ leadershipbyvote.name }}</h3>
+            </div>
+            <div class="col-2 count d-flex justify-content-center align-items-center">
+                <h1>{{ leadershipbyvote.count_vote }}</h1>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+
+
+
+</div>
+</div>
+
+
+
+</body>
+</html>

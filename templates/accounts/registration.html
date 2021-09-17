@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>DPL 2.0 - DEEPSENSE DIGITAL SOLUTIONS</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<style>
+
+
+
+    form{
+        /*border: solid 1px ;*/
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        border-radius: 10px;
+        max-width: 600px;
+        width: 90%;
+        padding: 16px;
+        background-color: white;
+    }
+    .container{
+    height: 100vh;
+    }
+    .btn{
+        background-color: #01afab;
+        color: #e1ecec;
+    }
+    .btn:hover{
+        background-color: rgba(1,175,171,0.5);
+    }
+    body{
+        background-color: #01afab;
+    }
+    @media screen and (max-width: 600px) {
+
+
+
+.sub-btn{
+    width: 100%;
+}
+
+
+
+}
+.logo{
+    min-width: 150px;
+}
+</style>
+<body>
+<nav class="navbar navbar-light bg-light fixed-top">
+  <a class="navbar-brand" href="https://deepsense.in/">
+    <img src="{% static 'deepsense_logo.png' %}" class="img-fluid logo" width="30" height="30" class="d-inline-block align-top" alt=""></a>
+    <a href="{% url 'leaderboard' %}"> <button class="btn">Result</button></a>
+</nav>
+
+
+
+
+
+
+<div   class="container d-flex my-auto justify-content-center  align-items-center" data-aos="zoom-in"
+    data-aos-offset="0"
+    data-aos-delay="30"
+    data-aos-duration="1000"
+    data-aos-easing="ease-in-out"
+    data-aos-mirror="true"
+    data-aos-once="true"
+    data-aos-anchor-placement="top-center">
+
+
+
+
+  <form   method="post" class="needs-validation"  novalidate>
+
+      <div class="text-center ">
+           <h2>DPL login Form</h2>
+      </div>
+
+
+{% csrf_token %}
+    <div class="form-group">
+      <label for="uemail">Email:</label>
+      <input type="email" class="form-control" id="uemail" placeholder="Enter Email" name="email" required>
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+    <div class="form-group">
+      <label for="upas">Password:</label>
+      <input type="date" class="form-control" id="upas" placeholder="Enter Password" name="password" required>
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+    <div><button type="submit" class="btn sub-btn">Submit</button></div>
+  </form>
+</div>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+<script>
+// Disable form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Get the forms we want to add validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>
+{% if messages %}
+     {% for message in messages %}
+    <script>
+Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Invalid Credentials!',
+                    })
+    </script>
+    {% endfor %}
+{% endif %}
+
+
+</body>
+</html>
